@@ -50,7 +50,7 @@ namespace Employee_CleanPattern.Controllers
         }
 
         [HttpPut("[action]")]
-        public async Task<IActionResult> PutEmployee(EmployeeVM employee)
+        public async Task<IActionResult> PutEmployee(PutEmployeeVM employee)
         {
             var res = await _mediator.Send(new UpdateEmployeeCommand(employee));
             if (res == -1)

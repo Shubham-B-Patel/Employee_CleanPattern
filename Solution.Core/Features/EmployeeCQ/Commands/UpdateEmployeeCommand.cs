@@ -6,12 +6,12 @@ namespace Solution.Core.Features.EmployeeCQ.Commands
 {
     public class UpdateEmployeeCommand : IRequest<int>
     {
-        public UpdateEmployeeCommand(EmployeeVM employeeVM)
+        public UpdateEmployeeCommand(PutEmployeeVM putEmployeeVM)
         {
-            this.employeeVM = employeeVM;
+            this.putEmployeeVM = putEmployeeVM;
         }
 
-        public EmployeeVM employeeVM { get; set; }
+        public PutEmployeeVM putEmployeeVM { get; set; }
     }
 
     public class UpdateEmployeeHandler : IRequestHandler<UpdateEmployeeCommand, int>
@@ -25,17 +25,19 @@ namespace Solution.Core.Features.EmployeeCQ.Commands
 
         public async Task<int> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var dbEmployee = await _context.Employees.FindAsync(request.employeeVM.Employee_Id, cancellationToken); ;
+            var dbEmployee = await _context.Employees.FindAsync(request.putEmployeeVM.Employee_Id, cancellationToken); ;
             if (dbEmployee == null)
             {
                 return -1;
             }
-            dbEmployee.First_Name = request.employeeVM.First_Name;
-            dbEmployee.Last_Name = request.employeeVM.Last_Name;
-            dbEmployee.Mobile_Number = request.employeeVM.Mobile_Number;
-            dbEmployee.Email = request.employeeVM.Email;
-            dbEmployee.DateOfBirth = request.employeeVM.DateOfBirth;
-            dbEmployee.Is_Deleted = request.employeeVM.Is_Deleted;
+            dbEmployee.First_Name = request.putEmployeeVM.First_Name;
+            dbEmployee.Last_Name = request.putEmployeeVM.Last_Name;
+            dbEmployee.Mobile_Number = request.putEmployeeVM.Mobile_Number;
+            dbEmployee.Email = request.putEmployeeVM.Email;
+            dbEmployee.DateOfBirth = request.putEmployeeVM.DateOfBirth;
+            dbEmployee.Is_Deleted = request.putEmployeeVM.Is_Deleted;
+            dbEmployee.LastModifiedBy = request.putEmployeeVM.User_Id.ToString();
+            dbEmployee.LastModifiedDate=DateTime.Now;
             var res = await _context.SaveChangesAsync(cancellationToken);
             if (res == 0)
             {

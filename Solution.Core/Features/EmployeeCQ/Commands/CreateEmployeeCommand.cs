@@ -32,7 +32,9 @@ namespace Solution.Core.Features.EmployeeCQ.Commands
                 Mobile_Number = request.addEmployeeVM.Mobile_Number,
                 Email = request.addEmployeeVM.Email,
                 DateOfBirth = request.addEmployeeVM.DateOfBirth,
-                Is_Deleted = false
+                Is_Deleted = false,
+                CreatedBy=request.addEmployeeVM.User_Id.ToString(),
+                CreatedDate=DateTime.Now,
             };
 
             /*Employee employee = employeeVM.Adapt<Employee>();
