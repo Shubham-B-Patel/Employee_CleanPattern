@@ -8,20 +8,20 @@ namespace Solution.Core.Features.UsersCQ.Queries
 {
     public class LoginUserQuery : IRequest<ReturnUserVM>
     {
-        public LoginUserQuery(LoginVM loginVM)
+        public LoginUserQuery(LoginUserVM loginVM)
         {
             this.loginVM = loginVM;
         }
 
-        public LoginVM loginVM { get; set; }
+        public LoginUserVM loginVM { get; set; }
     }
 
-    public class LoginQueryHandler : IRequestHandler<LoginUserQuery, ReturnUserVM>
+    public class LoginUserHandler : IRequestHandler<LoginUserQuery, ReturnUserVM>
     {
         private readonly IEmployeeDbContext _context;
         private readonly IMapper _mapper;
 
-        public LoginQueryHandler(IEmployeeDbContext context, IMapper mapper)
+        public LoginUserHandler(IEmployeeDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

@@ -15,6 +15,8 @@ namespace Solution.Infrastructure.Persistence.Configurations.Entities._Employee
             /* Table columns configuration */
             builder.Property(p => p.First_Name).HasColumnName("First_Name").HasMaxLength(100);
             builder.Property(p => p.Last_Name).HasColumnName("Last_Name").HasMaxLength(100);
+            builder.Property(p => p.Employee_Name).HasColumnName("Employee_Name").HasMaxLength(100);           
+            builder.Property(p => p.Password).HasColumnName("Password").HasMaxLength(50);
             builder.Property(p => p.Mobile_Number).HasColumnName("Mobile_Number").HasMaxLength(13);
             builder.Property(p => p.Email).HasColumnName("Email").HasMaxLength(100);
             builder.Property(p => p.DateOfBirth).HasColumnName("DateOfBirth");

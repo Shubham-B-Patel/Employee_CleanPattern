@@ -35,7 +35,8 @@ namespace Solution.Core.Features.SkillCQ.Commands
             dbSkill.Tech_Name = request.updateSkillVM.Tech_Name;
             dbSkill.Work_Exp = request.updateSkillVM.Work_Exp;
             dbSkill.Rating = request.updateSkillVM.Rating;
-
+            dbSkill.LastModifiedBy = request.updateSkillVM.Employee_Id.ToString();
+            dbSkill.LastModifiedDate=DateTime.Now;
 
             var res = await _context.SaveChangesAsync(cancellationToken);
             if (res > 0)

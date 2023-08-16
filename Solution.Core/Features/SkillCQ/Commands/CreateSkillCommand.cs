@@ -41,6 +41,9 @@ namespace Solution.Core.Features.SkillCQ.Commands
                 Work_Exp = Convert.ToDecimal(request.addSkillVM.Work_Exp),
                 Rating = Convert.ToDecimal(request.addSkillVM.Rating),
                 Employee_Id = dbEmployee.Employee_Id,
+                Active = true,
+                CreatedBy=dbEmployee.Employee_Id.ToString(),
+                CreatedDate=DateTime.Now,
             };
 
             /*Skill skill = skillVM.Adapt<Skill>();

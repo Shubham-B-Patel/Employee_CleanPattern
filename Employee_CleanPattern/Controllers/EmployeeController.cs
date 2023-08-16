@@ -1,8 +1,12 @@
-﻿using MediatR;
+﻿using Employee_CleanPattern.Helper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Solution.Core.Features.EmployeeCQ.Commands;
 using Solution.Core.Features.EmployeeCQ.Queries;
 using Solution.Core.Features.EmployeeCQ.ViewModels;
+using Solution.Core.Features.UsersCQ.Queries;
+using Solution.Core.Features.UsersCQ.ViewModels;
 
 namespace Employee_CleanPattern.Controllers
 {
@@ -11,10 +15,12 @@ namespace Employee_CleanPattern.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IConfiguration _iconfiguration;
 
-        public EmployeeController(IMediator mediator)
+        public EmployeeController(IMediator mediator, IConfiguration configuration)
         {
             _mediator = mediator;
+            _iconfiguration = configuration;
         }
 
         [HttpGet("[action]")]
@@ -48,6 +54,24 @@ namespace Employee_CleanPattern.Controllers
 
             return Ok(res);
         }
+        [HttpPost("[action]")]
+        public async Task<IActionResult> LoginUser(LoginEmployeeVM data)
+        {
+            var res = await _mediator.Send(new LoginEmployeeQuery(data));
+            if (res != null)
+            {
+                CreateJwtToken obj = new CreateJwtToken(_iconfiguration);
+                var token = obj.CreateToken(res.Employee_Id, res.Employee_Name);
+                return Ok(new
+                {
+                    message = "Success",
+                    token = token,
+                    user = res
+                }); ;
+            }
+            return BadRequest("Invalid Credentials!!! Please Enter valid User_Name And Password");
+        }
+
 
         [HttpPut("[action]")]
         public async Task<IActionResult> PutEmployee(PutEmployeeVM employee)

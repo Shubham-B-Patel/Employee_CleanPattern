@@ -40,12 +40,13 @@ namespace Employee_CleanPattern.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> LoginUser(LoginVM data)
+        public async Task<IActionResult> LoginUser(LoginUserVM data)
         {
             var res = await _mediator.Send(new LoginUserQuery(data));
             if (res != null)
             {
-                var token = CreateJwtToken(res);
+                CreateJwtToken obj = new CreateJwtToken(_iconfiguration);
+                var token = obj.CreateToken(res.User_Id, res.User_Name);
                 return Ok(new
                 {
                     message = "Success",
@@ -87,7 +88,7 @@ namespace Employee_CleanPattern.Controllers
             });
         }
 
-        [NonAction]
+        /*[NonAction]
         private string CreateJwtToken(ReturnUserVM user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
@@ -110,6 +111,6 @@ namespace Employee_CleanPattern.Controllers
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
 
             return jwtTokenHandler.WriteToken(token);
-        }
+        }*/
     }
 }

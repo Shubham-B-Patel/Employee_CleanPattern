@@ -52,6 +52,8 @@ namespace Solution.Core.Features.EmployeeCQ.Queries
                 Employee_Id = dbEmployee.Employee_Id,
                 First_Name = dbEmployee.First_Name,
                 Last_Name = dbEmployee.Last_Name,
+                Employee_Name = dbEmployee.Employee_Name,
+                Password = dbEmployee.Password,
                 Mobile_Number = dbEmployee.Mobile_Number,
                 Email = dbEmployee.Email,
                 DateOfBirth = dbEmployee.DateOfBirth,
