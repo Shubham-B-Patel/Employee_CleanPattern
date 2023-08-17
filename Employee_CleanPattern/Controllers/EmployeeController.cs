@@ -1,12 +1,9 @@
 ﻿using Employee_CleanPattern.Helper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Solution.Core.Features.EmployeeCQ.Commands;
 using Solution.Core.Features.EmployeeCQ.Queries;
 using Solution.Core.Features.EmployeeCQ.ViewModels;
-using Solution.Core.Features.UsersCQ.Queries;
-using Solution.Core.Features.UsersCQ.ViewModels;
 
 namespace Employee_CleanPattern.Controllers
 {
@@ -55,7 +52,7 @@ namespace Employee_CleanPattern.Controllers
             return Ok(res);
         }
         [HttpPost("[action]")]
-        public async Task<IActionResult> LoginUser(LoginEmployeeVM data)
+        public async Task<IActionResult> LoginEmployee(LoginEmployeeVM data)
         {
             var res = await _mediator.Send(new LoginEmployeeQuery(data));
             if (res != null)
@@ -71,7 +68,6 @@ namespace Employee_CleanPattern.Controllers
             }
             return BadRequest("Invalid Credentials!!! Please Enter valid User_Name And Password");
         }
-
 
         [HttpPut("[action]")]
         public async Task<IActionResult> PutEmployee(PutEmployeeVM employee)
