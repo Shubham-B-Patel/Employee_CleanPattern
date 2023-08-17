@@ -12,7 +12,7 @@ using Solution.Infrastructure.Persistence;
 namespace Solution.Infrastructure.Migrations
 {
     [DbContext(typeof(EmployeeDbContext))]
-    [Migration("20230811064236_initial")]
+    [Migration("20230817042318_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -53,6 +53,12 @@ namespace Solution.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("Email");
 
+                    b.Property<string>("Employee_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Employee_Name");
+
                     b.Property<string>("First_Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -80,6 +86,12 @@ namespace Solution.Infrastructure.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)")
                         .HasColumnName("Mobile_Number");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Password");
 
                     b.HasKey("Employee_Id");
 
@@ -132,6 +144,77 @@ namespace Solution.Infrastructure.Migrations
                     b.HasIndex("Employee_Id");
 
                     b.ToTable("Skill", "employee");
+                });
+
+            modelBuilder.Entity("Solution.Domain.Entities._User.Users", b =>
+                {
+                    b.Property<int>("User_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Employee_Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("User_Id"));
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DateOfBirth");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Email");
+
+                    b.Property<string>("First_Name")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("First_Name");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Last_Name")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Last_Name");
+
+                    b.Property<string>("Mobile_Number")
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)")
+                        .HasColumnName("Mobile_Number");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Password");
+
+                    b.Property<string>("Profile_Path")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("Profile_Path");
+
+                    b.Property<string>("User_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("User_Name");
+
+                    b.HasKey("User_Id");
+
+                    b.ToTable("Users", "employee");
                 });
 
             modelBuilder.Entity("Solution.Domain.Entities._Employee.Skill", b =>

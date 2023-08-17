@@ -45,7 +45,7 @@ namespace Solution.Core.Features.EmployeeCQ.Commands
             {
                 First_Name = request.addEmployeeVM.First_Name,
                 Last_Name = request.addEmployeeVM.Last_Name,
-                Employee_Name = newdob,
+                Employee_Name = User_Name,
                 Password = password,
                 Mobile_Number = request.addEmployeeVM.Mobile_Number,
                 Email = request.addEmployeeVM.Email,

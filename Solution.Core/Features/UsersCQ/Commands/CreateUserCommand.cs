@@ -55,7 +55,8 @@ namespace Solution.Core.Features.UsersCQ.Commands
                 Email = request.addUserVM.Email,
                 Mobile_Number = request.addUserVM.Mobile_Number,
                 Password = password,
-                Profile_Path = ""
+                Profile_Path = "",
+                CreatedDate=DateTime.Now,
             };
 
 
